@@ -1,4 +1,4 @@
-package club.chiringo.quiz.balon.oro.balonOro;
+package club.chiringo.quiz.balon.oro.balon.oro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
