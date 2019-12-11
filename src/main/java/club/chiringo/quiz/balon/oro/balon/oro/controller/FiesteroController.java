@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/quiz/fiestero")
 public class FiesteroController {
 
@@ -23,7 +24,7 @@ public class FiesteroController {
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity listFiesteros() {
-        return new ResponseEntity<>(fiesteroManager.getAllFiesteros(), HttpStatus.OK);
+        return new ResponseEntity<>(fiesteroManager.getAllFiesterosTO(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,16 +40,16 @@ public class FiesteroController {
         WinnersJSON winners = new WinnersJSON();
         List<Fiestero> fiesteros = fiesteroManager.getAllFiesteros();
 
-        winners.setWinner(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainScore)).collect(Collectors.toList()).get(0));
+        winners.setWinner(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainScore).reversed()).collect(Collectors.toList()).get(0));
         fiesteros.remove(winners.getWinner());
 
-        winners.setDrunk(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainDrunkScore)).collect(Collectors.toList()).get(0));
+        winners.setDrunk(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainDrunkScore).reversed()).collect(Collectors.toList()).get(0));
         fiesteros.remove(winners.getDrunk());
 
-        winners.setConstant(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainConstantScore)).collect(Collectors.toList()).get(0));
+        winners.setConstant(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainConstantScore).reversed()).collect(Collectors.toList()).get(0));
         fiesteros.remove(winners.getConstant());
 
-        winners.setMarried(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainMarriedScore)).collect(Collectors.toList()).get(0));
+        winners.setMarried(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainMarriedScore).reversed()).collect(Collectors.toList()).get(0));
 
         return new ResponseEntity<>(winners, HttpStatus.OK);
     }
