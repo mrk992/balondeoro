@@ -2,13 +2,13 @@ package club.chiringo.quiz.balon.oro.balon.oro.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bson.types.ObjectId;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
-public class FiesteroTO implements Serializable {
-    private ObjectId objectId;
-    private AwardType award;
+public class VoteJSON implements Serializable {
+    private int fiesteroId;
+    private List<ScoresTO> scores;
 }
