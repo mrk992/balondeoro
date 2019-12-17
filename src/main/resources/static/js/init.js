@@ -4,14 +4,14 @@
     let marriedIds = ["married1stars", "married3stars", "married5Stars"];
 
     $(function () {
-
+        let mainURL= "http://balondeoro.chiringo.club";
         $('.sidenav').sidenav();
         $('.parallax').parallax();
 
         let fiesteros;
 
 
-        $.get("http://localhost:8080/quiz/fiestero/list", function (data) {
+        $.get( mainURL + "/quiz/fiestero/list", function (data) {
             fiesteros = data;
 
             drunksIds.forEach(element => {
@@ -41,11 +41,6 @@
                 $('select').formSelect();
             });
         });
-
-        $.get("http://localhost:8080/quiz/fiestero/winners", function (data) {
-            console.log(data);
-        });
-
     }); // end of document ready
 
 
@@ -103,7 +98,7 @@
         console.log(JSON.stringify(vote));
 
         $.ajax({
-            url: 'http://localhost:8080/quiz/score/vote',
+            url: mainURL + '/quiz/score/vote',
             type: 'POST',
             headers: {
                 'Accept': 'application/json',

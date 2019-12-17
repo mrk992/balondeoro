@@ -40,7 +40,8 @@ public class FiesteroController {
         WinnersJSON winners = new WinnersJSON();
         List<Fiestero> fiesteros = fiesteroManager.getAllFiesteros();
 
-        winners.setWinner(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainScore).reversed()).collect(Collectors.toList()).get(0));
+        winners.setWinner(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainScore).reversed())
+                .collect(Collectors.toList()).get(0));
         fiesteros.remove(winners.getWinner());
 
         winners.setDrunk(fiesteros.stream().sorted(Comparator.comparing(Fiestero::getMainDrunkScore).reversed()).collect(Collectors.toList()).get(0));

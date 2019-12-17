@@ -1,0 +1,27 @@
+version: '3'
+services:
+  balondeoro:
+    #build:
+    #  context: ./
+     # dockerfile: Dockerfile
+    image: mrk992/balondeoro:v1
+    ports:
+      - 8888:8080
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+    networks:
+      - mongo
+  mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+        volumes:
+          - mongodata:/data/db
+        networks:
+          - mongo
+
+volumes:
+  mongodata:
+
+networks:
+  mongo:
