@@ -5,8 +5,10 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface IScoresRepository extends MongoRepository<Scores, String> {
 
-    Scores findByFiesteroId(ObjectId fiesteroId);
+    Optional<Scores> findByFiesteroId(String fiesteroId);
 }
