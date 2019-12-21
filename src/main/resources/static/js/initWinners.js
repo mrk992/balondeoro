@@ -4,7 +4,8 @@
 
         $('.sidenav').sidenav();
 
-        let mainURL= "http://balondeoro.chiringo.club";;
+        let mainURL = "https://balondeoro.chiringo.club";
+        let imagesURL = "https://balondeoro.chiringo.club/images/fiesteros";
 
 
         $.get( mainURL + "/quiz/fiestero/winners", function (data) {
@@ -14,12 +15,9 @@
             $("#drunkName").html(data.drunk.name);
             $("#drunk").attr("src",data.drunk.photoURL);
             $("#constantName").html(data.constant.name);
-            $("#constant").attr("src",data.constant.photoURL);
+            $("#constant").attr("src", data.constant.photoURL);
             $("#marriedName").html(data.married.name);
-            $("#married").attr("src",data.married.photoURL);
-            console.log(data.winner.photoURL);
-            console.log(data.winner.photoURL);
-            console.log(data.winner.photoURL);
+            $("#married").attr("src", data.married.photoURL);
         });
 
     });

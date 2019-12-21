@@ -2,9 +2,9 @@
     let drunksIds = ["drunks1stars", "drunks3stars", "drunks5stars"];
     let constantsIds = ["constant1stars", "constant3stars", "constant5stars"];
     let marriedIds = ["married1stars", "married3stars", "married5Stars"];
-
+    let mainURL= "https://balondeoro.chiringo.club";
     $(function () {
-        let mainURL= "http://balondeoro.chiringo.club";
+
         $('.sidenav').sidenav();
         $('.parallax').parallax();
 
@@ -46,7 +46,7 @@
 
 
     $("#send").click(function () {
-
+        $("#send").prop("disabled",true);
         let vote = {};
         vote.fiesteroId = 1;
         vote.scores = [];
@@ -107,6 +107,9 @@
             },
             data: JSON.stringify(vote),
             contentType: "application/json"
+        }).done(function( data ) {
+            M.toast({html: 'Ala ya has votao!'});
+            window.location.replace("https://balondeoro.chiringo.club/wait/wait.html");
         });
     });
 
