@@ -5,7 +5,6 @@ import club.chiringo.quiz.balon.oro.balon.oro.model.FiesteroTO;
 import club.chiringo.quiz.balon.oro.balon.oro.model.Scores;
 import club.chiringo.quiz.balon.oro.balon.oro.model.repository.IFiesteroRepository;
 import club.chiringo.quiz.balon.oro.balon.oro.model.repository.IScoresRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,16 +45,20 @@ public class FiesteroManager {
         fiesteros.forEach(
                 fiestero -> {
                     Scores scores = scoresRepository.findByFiesteroId(fiestero.get_id().toString()).orElse(null);
-                    fiestero.setMainScore(5 * scores.getDrunkScore() + 3 * scores.getConstScore() - 2 * scores.getMarriedScore());
+                    if (scores != null) {
+                        System.out.println(scores.getFiesteroId());
+                        int score = (5 * scores.getDrunkScore() + 3 * scores.getConstScore() - 2 * scores.getMarriedScore());
+                        fiestero.setMainScore(Math.max(score, 0));
 
-                    if(scores.getConstScore() != 0) {
-                        fiestero.setMainConstantScore(scores.getConstScore() / scores.getConstVotes());
-                    }
-                    if(scores.getDrunkScore() != 0) {
-                        fiestero.setMainDrunkScore(scores.getDrunkScore() / scores.getDrunkVotes());
-                    }
-                    if(scores.getMarriedScore() != 0) {
-                        fiestero.setMainMarriedScore(scores.getMarriedScore() / scores.getMarriedVotes());
+                        if (scores.getConstScore() != 0) {
+                            fiestero.setMainConstantScore(scores.getConstScore() / scores.getConstVotes());
+                        }
+                        if (scores.getDrunkScore() != 0) {
+                            fiestero.setMainDrunkScore(scores.getDrunkScore() / scores.getDrunkVotes());
+                        }
+                        if (scores.getMarriedScore() != 0) {
+                            fiestero.setMainMarriedScore(scores.getMarriedScore() / scores.getMarriedVotes());
+                        }
                     }
                 }
         );
