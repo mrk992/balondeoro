@@ -46,18 +46,17 @@ public class FiesteroManager {
                 fiestero -> {
                     Scores scores = scoresRepository.findByFiesteroId(fiestero.get_id().toString()).orElse(null);
                     if (scores != null) {
-                        System.out.println(scores.getFiesteroId());
                         int score = (5 * scores.getDrunkScore() + 3 * scores.getConstScore() - 2 * scores.getMarriedScore());
                         fiestero.setMainScore(Math.max(score, 0));
 
                         if (scores.getConstScore() != 0) {
-                            fiestero.setMainConstantScore(scores.getConstScore() / scores.getConstVotes());
+                            fiestero.setMainConstantScore(scores.getConstScore());
                         }
                         if (scores.getDrunkScore() != 0) {
-                            fiestero.setMainDrunkScore(scores.getDrunkScore() / scores.getDrunkVotes());
+                            fiestero.setMainDrunkScore(scores.getDrunkScore());
                         }
                         if (scores.getMarriedScore() != 0) {
-                            fiestero.setMainMarriedScore(scores.getMarriedScore() / scores.getMarriedVotes());
+                            fiestero.setMainMarriedScore(scores.getMarriedScore());
                         }
                     }
                 }
